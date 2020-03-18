@@ -12,8 +12,6 @@ import tech.jaya.jhony.octoevents.event.Events
 import tech.jaya.jhony.octoevents.issue.Issues
 import tech.jaya.jhony.octoevents.repository.Repositories
 import tech.jaya.jhony.octoevents.user.Users
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.util.Properties
 
 class ApplicationServerComponent : KoinComponent {
