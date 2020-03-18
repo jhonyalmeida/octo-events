@@ -41,8 +41,7 @@ class ApplicationServerComponent : KoinComponent {
     }
 
     private fun loadProperties() : Properties {
-        val filePath = Paths.get(javaClass.classLoader.getResource("application.properties").toURI())
-        return Files.newInputStream(filePath).use { `in` ->
+        return javaClass.classLoader.getResourceAsStream("application.properties").use { `in` ->
             val props = Properties()
             props.load(`in`)
             props
