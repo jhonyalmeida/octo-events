@@ -61,8 +61,8 @@ fun createEvents() : List<EventDto> {
     val issue1 = IssueDto(1, 1, "issue 1", "closed", "https://api.github.com/repos/octocat/Hello-World/issues/1")
     val issue2 = IssueDto(2, 2, "issue 2", "open", "https://api.github.com/repos/octocat/Hello-World/issues/2")
     return listOf(
-        EventDto("created", issue1, repository, user2).createdAt(LocalDateTime.of(2020, 3, 16, 12, 30)),
+        EventDto("created", issue2, repository, user2).createdAt(LocalDateTime.of(2020, 3, 17, 10, 45)),
         EventDto("closed", issue1, repository, user1).createdAt(LocalDateTime.of(2020, 3, 16, 23, 15)),
-        EventDto("created", issue2, repository, user2).createdAt(LocalDateTime.of(2020, 3, 17, 10, 45))
+        EventDto("created", issue1, repository, user2).createdAt(LocalDateTime.of(2020, 3, 16, 12, 30))
     )
 }
