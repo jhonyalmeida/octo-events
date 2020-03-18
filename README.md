@@ -23,7 +23,7 @@ database.create-on-startup=true
 application.port=7000
 ```
 
-The `create-on-startup` property will automatically drop and create the application database when set to _true_. After first execution, it should be set to _false_.
+The `create-on-startup` property will automatically create the application database when set to _true_. After first execution, it can be set to _false_.
 
 * Configure a web hook in your repository at <https://github.com> and point the url to the application `POST /events` endpoint. Further help in this task can be found at <https://developer.github.com/webhooks/configuring/>.
 
