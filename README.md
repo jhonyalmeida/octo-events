@@ -29,6 +29,8 @@ The `create-on-startup` property will automatically create the application datab
 
 * Run application and generate events in your repository, like creating and closing an issue. The events should have been registered and can be listed by issue number at `GET /issues/{issueNumber}/events` endpoint.
 
+* You can also generate a self contained jar with `mvn package`, wich can be executed like `java -jar target/octo-events-1.0.0-SNAPSHOT-jar-with-dependencies.jar`
+
 ## Testing
 
 There are functional tests implemented for each endpoint, currently using the H2 database for persistence. They were implemented using as example the code shown in Javalin testing page: <https://javalin.io/tutorials/testing>
