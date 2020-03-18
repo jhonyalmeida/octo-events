@@ -18,7 +18,7 @@ class ApplicationServerComponentTest {
     private val events = createEvents()
 
     companion object {
-        val app = ApplicationServerComponent()
+        private val app = ApplicationServerComponent()
 
         @JvmStatic
         @BeforeClass

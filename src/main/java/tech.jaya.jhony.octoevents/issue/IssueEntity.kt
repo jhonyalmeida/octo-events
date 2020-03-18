@@ -21,4 +21,8 @@ class Issue(id: EntityID<Long>) : LongEntity(id) {
     var title by Issues.title
     var state by Issues.state
     var url by Issues.url
+
+    fun toModel() : IssueDto {
+        return IssueDto(id.value, number, title, state, url)
+    }
 }

@@ -15,4 +15,8 @@ class User(id: EntityID<Long>) : LongEntity(id) {
     companion object : LongEntityClass<User>(Users)
 
     var login by Users.login
+
+    fun toModel() : UserDto {
+        return UserDto(id.value, login)
+    }
 }

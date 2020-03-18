@@ -19,4 +19,8 @@ class Repository(id: EntityID<Long>) : LongEntity(id) {
 
     var fullName by Repositories.fullName
     var ownerUser by User referencedOn Repositories.ownerUser
+
+    fun toModel() : RepositoryDto {
+        return RepositoryDto(id.value, fullName, ownerUser.toModel())
+    }
 }

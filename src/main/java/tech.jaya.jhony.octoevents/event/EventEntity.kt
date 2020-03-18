@@ -4,7 +4,12 @@ import org.jetbrains.exposed.dao.LongEntity
 import org.jetbrains.exposed.dao.LongEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.LongIdTable
+import org.jetbrains.exposed.sql.JoinType
+import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.`java-time`.datetime
+import org.jetbrains.exposed.sql.alias
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 import tech.jaya.jhony.octoevents.issue.Issue
 import tech.jaya.jhony.octoevents.issue.Issues
 import tech.jaya.jhony.octoevents.repository.Repositories
@@ -21,7 +26,23 @@ object Events : LongIdTable(name = "event") {
 }
 
 class Event(id: EntityID<Long>) : LongEntity(id) {
-    companion object : LongEntityClass<Event>(Events)
+
+    companion object : LongEntityClass<Event>(Events) {
+        fun findByIssueNumber(issueNumber: Long): List<EventDto> {
+            return transaction {
+                val ownerUser = Users.alias("owner")
+                val senderUser = Users.alias("sender")
+                val query =  Events.innerJoin(Issues)
+                    .innerJoin(Repositories)
+                    .join(senderUser, JoinType.INNER, senderUser[Users.id], Repositories.ownerUser)
+                    .join(ownerUser, JoinType.INNER, ownerUser[Users.id], Events.user)
+                    .select { Issues.number eq issueNumber }
+                    .orderBy(Events.createdAt, SortOrder.DESC)
+
+                wrapRows(query).map { event -> event.toModel() }.toList()
+            }
+        }
+    }
 
     var action by Events.action
     var createdAt by Events.createdAt
@@ -29,4 +50,10 @@ class Event(id: EntityID<Long>) : LongEntity(id) {
     var repository by Repository referencedOn Events.repository
     var user by User referencedOn Events.user
 
+    fun toModel() : EventDto {
+        val issue = issue.toModel()
+        val repository = repository.toModel()
+        val sender = user.toModel()
+        return EventDto(action, issue, repository, sender).createdAt(createdAt)
+    }
 }
