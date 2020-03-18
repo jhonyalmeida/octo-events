@@ -72,8 +72,7 @@ class ApplicationServerComponent : KoinComponent {
 
         if (props.getProperty("database.create-on-startup") == "true") {
             transaction {
-                SchemaUtils.drop(Events, Issues, Repositories, Users)
-                SchemaUtils.create(Events, Issues, Repositories, Users)
+                SchemaUtils.create(Users, Issues, Repositories, Events)
             }
         }
     }

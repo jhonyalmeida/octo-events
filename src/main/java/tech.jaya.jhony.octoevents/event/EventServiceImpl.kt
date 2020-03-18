@@ -77,9 +77,9 @@ class EventServiceImpl(private val issueService: IssueService,
 object Events : LongIdTable(name = "event") {
     val action = varchar("action", length = 200)
     val createdAt = datetime("created_at")
-    val issue = reference("issue_id", Issues)
-    val repository = reference("repository_id", Repositories)
-    val user = reference("user_id", Users)
+    val issue = reference("issue_id", refColumn = Issues.id)
+    val repository = reference("repository_id", refColumn = Repositories.id)
+    val user = reference("user_id", refColumn = Users.id)
 }
 
 class Event(id: EntityID<Long>) : LongEntity(id) {

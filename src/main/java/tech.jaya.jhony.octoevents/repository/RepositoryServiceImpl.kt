@@ -27,8 +27,8 @@ class RepositoryServiceImpl(private val userService: UserService) :
 object Repositories : IdTable<Long>(name = "repository") {
     override val id = long("id").entityId()
     val fullName = varchar("full_name", length = 255)
-    val ownerUser = reference("owner_user_id", Users)
-    override val primaryKey by lazy { super.primaryKey ?: PrimaryKey(Users.id, name = "pk_repository_id") }
+    val ownerUser = reference("owner_user_id", refColumn = Users.id)
+    override val primaryKey by lazy { super.primaryKey ?: PrimaryKey(id, name = "pk_repository_id") }
 }
 
 class Repository(id: EntityID<Long>) : LongEntity(id) {

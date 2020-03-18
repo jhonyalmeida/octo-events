@@ -22,9 +22,9 @@ class IssueServiceImpl : IssueService {
 
 object Issues : IdTable<Long>(name = "issue") {
     override val id = long("id").entityId()
-    var number = long("number").index()
-    var title = varchar("title", length = 255)
-    var state = varchar("state", length = 100)
+    val number = long("number").index()
+    val title = varchar("title", length = 255)
+    val state = varchar("state", length = 100)
     val url = varchar("url", length = 255)
     override val primaryKey by lazy { super.primaryKey ?: PrimaryKey(id, name = "pk_issue_id") }
 }
