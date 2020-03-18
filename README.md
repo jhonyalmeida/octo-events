@@ -27,6 +27,8 @@ The `create-on-startup` property will automatically create the application datab
 
 * Configure a web hook in your repository at <https://github.com> and point the url to the application `POST /events` endpoint. Further help in this task can be found at <https://developer.github.com/webhooks/configuring/>.
 
+* Optionally, configure the webhook secret in the property `application.secret` to validate requests
+
 * Run application and generate events in your repository, like creating and closing an issue. The events should have been registered and can be listed by issue number at `GET /issues/{issueNumber}/events` endpoint.
 
 * You can also generate a self contained jar with `mvn package`, wich can be executed like `java -jar target/octo-events-1.0.0-SNAPSHOT-jar-with-dependencies.jar`
